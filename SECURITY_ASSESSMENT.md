@@ -1,6 +1,6 @@
 # Security Assessment
 
-A threat assessment of this project as of [v2026.08.0](https://github.com/SecureLayer/tmp/releases/tag/v2026.08.0), based on the real architecture in [ARCHITECTURE.md](ARCHITECTURE.md). This is a static site with no backend, no database, and no visitor-submitted data — the attack surface is small, but not zero.
+A threat assessment of this project as of [v2026.08.0](https://github.com/SecureLayer/landing/releases/tag/v2026.08.0), based on the real architecture in [ARCHITECTURE.md](ARCHITECTURE.md). This is a static site with no backend, no database, and no visitor-submitted data — the attack surface is small, but not zero.
 
 ## Assets at risk
 

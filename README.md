@@ -1,13 +1,11 @@
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/SecureLayer/tmp/badge)](https://scorecard.dev/viewer/?uri=github.com/SecureLayer/tmp)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/SecureLayer/landing/badge)](https://scorecard.dev/viewer/?uri=github.com/SecureLayer/landing)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/11681/badge)](https://www.bestpractices.dev/projects/11681)
 [![OpenSSF Baseline](https://www.bestpractices.dev/projects/11681/baseline)](https://www.bestpractices.dev/projects/11681)
-[![CI](https://github.com/SecureLayer/tmp/actions/workflows/ci.yml/badge.svg)](https://github.com/SecureLayer/tmp/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/SecureLayer/tmp/actions/workflows/codeql.yml/badge.svg)](https://github.com/SecureLayer/tmp/actions/workflows/codeql.yml)
-[![DeepScan grade](https://deepscan.io/api/teams/30657/projects/32420/branches/1072230/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=30657&pid=32420&bid=1072230)
+[![CI](https://github.com/SecureLayer/landing/actions/workflows/ci.yml/badge.svg)](https://github.com/SecureLayer/landing/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/SecureLayer/landing/actions/workflows/codeql.yml/badge.svg)](https://github.com/SecureLayer/landing/actions/workflows/codeql.yml)
+[![DeepScan grade](https://deepscan.io/api/teams/30657/projects/32423/branches/1072240/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=30657&pid=32423&bid=1072240)
 
 # SecureLayer
-
-**Freelance cybersecurity services — landing page and service catalogue.**
 
 This repository hosts [securelayer.co](https://securelayer.co), an informational landing page presenting SecureLayer's freelance cybersecurity service catalogue (Application Security, SecDevOps, IT Security, AI Security, security advice) and links to social media. The site does not provide any interactive tool, download, or service directly — book a call at [cal.com/securelayer](https://cal.com/securelayer).
 

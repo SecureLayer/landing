@@ -12,7 +12,7 @@ No account, no login, no data submission forms exist on the site itself.
 - Downloads the service-catalogue PDF.
 - Follows outbound links to [cal.com/securelayer](https://cal.com/securelayer) to book a call — booking data (name, email, timezone) is handled entirely by Cal.com, never touches this codebase or its infrastructure.
 - Follows outbound links to social media (Bluesky, Instagram, GitHub).
-- Can report a security vulnerability via [GitHub Security Advisories](https://github.com/SecureLayer/tmp/security/advisories/new) (private) or open a public GitHub issue for non-security bugs/content problems.
+- Can report a security vulnerability via [GitHub Security Advisories](https://github.com/SecureLayer/landing/security/advisories/new) (private) or open a public GitHub issue for non-security bugs/content problems.
 
 ### Maintainer (sole)
 
