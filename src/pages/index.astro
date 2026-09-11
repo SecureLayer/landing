@@ -219,6 +219,30 @@ const logoMark = logoSource
         <span>What-do-we-do.pdf</span>
       </a>
 
+      <!-- WIDGET · file (value one-pager) -->
+      <a
+        class="widget widget-file pos-fr"
+        href="/docs/before-you-say-you-are-secure.pdf"
+        target="_blank"
+        rel="noopener"
+      >
+        <div class="pdf-page">
+          <div class="pdf-thumb"></div>
+          <div class="pdf-badge">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="none"
+              ><circle cx="7" cy="7" r="5" stroke="#fff" stroke-width="1.6"
+              ></circle><path
+                d="M11 11l3.5 3.5"
+                stroke="#fff"
+                stroke-width="1.6"
+                stroke-linecap="round"></path></svg
+            >
+          </div>
+          <div class="pdf-label">PDF</div>
+        </div>
+        <span>Before-you-say-you-are-secure.pdf</span>
+      </a>
+
       <!-- WIDGET · quick-look preview (revealed on menu-bar hover) -->
       <div class="widget widget-preview pos-tl" id="preview-window">
         <div class="preview-titlebar">
@@ -610,7 +634,7 @@ const logoMark = logoSource
               </div>
               <a
                 class="m-contact-cta"
-                href="https://github.com/SecureLayer/tmp/security/advisories/new"
+                href="https://github.com/SecureLayer/landing/security/advisories/new"
                 target="_blank"
                 rel="noopener">report</a
               >
@@ -626,7 +650,7 @@ const logoMark = logoSource
             <a href="/sustainability">Environment</a>
             <a href="/legal">Legal</a>
             <a
-              href="https://github.com/SecureLayer/tmp"
+              href="https://github.com/SecureLayer/landing"
               target="_blank"
               rel="noopener">Source</a
             >
@@ -1016,6 +1040,18 @@ const logoMark = logoSource
   .pos-bl {
     top: 306px;
     left: 31px;
+  }
+  .pos-fr {
+    top: 80px;
+    left: 50%;
+    transform: translateX(110px);
+  }
+  /* long filename — wrap to a few lines like a real macOS icon so the
+     widget stays narrow and clears the Reminders card */
+  .pos-fr span {
+    max-width: 108px;
+    white-space: normal;
+    line-height: 1.25;
   }
 
   .widget-note {

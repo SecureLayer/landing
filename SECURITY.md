@@ -12,7 +12,7 @@ See [SECURITY_ASSESSMENT.md](SECURITY_ASSESSMENT.md) for the project's threat as
 
 **Do not open a public GitHub issue for security vulnerabilities.**
 
-Please report privately via [GitHub Security Advisories](https://github.com/SecureLayer/tmp/security/advisories/new).
+Please report privately via [GitHub Security Advisories](https://github.com/SecureLayer/landing/security/advisories/new).
 
 Include:
 
@@ -25,7 +25,7 @@ We will acknowledge receipt within **14 days** and aim to resolve confirmed vuln
 
 ### Coordinated disclosure
 
-This project follows coordinated disclosure: please give us the time above to investigate and ship a fix before any public disclosure. Once a confirmed vulnerability is resolved, we will publish a [GitHub Security Advisory](https://github.com/SecureLayer/tmp/security/advisories) describing the issue and crediting the reporter (unless you'd prefer to remain anonymous — just say so in your report). If a fix isn't possible within 60 days, we will proactively update you with a revised timeline rather than go silent.
+This project follows coordinated disclosure: please give us the time above to investigate and ship a fix before any public disclosure. Once a confirmed vulnerability is resolved, we will publish a [GitHub Security Advisory](https://github.com/SecureLayer/landing/security/advisories) describing the issue and crediting the reporter (unless you'd prefer to remain anonymous — just say so in your report). If a fix isn't possible within 60 days, we will proactively update you with a revised timeline rather than go silent.
 
 ### Safe harbor
 

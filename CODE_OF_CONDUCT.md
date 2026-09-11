@@ -47,7 +47,7 @@ the project in public spaces.
 
 This project does not monitor a public email inbox. Instances of abusive,
 harassing, or otherwise unacceptable behavior may be reported privately via
-[GitHub Security Advisories](https://github.com/SecureLayer/tmp/security/advisories/new)
+[GitHub Security Advisories](https://github.com/SecureLayer/landing/security/advisories/new)
 — the project's existing private reporting channel — using the same
 acknowledgment timeline described in [SECURITY.md](SECURITY.md). All
 complaints will be reviewed and investigated promptly and fairly.
