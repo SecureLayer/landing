@@ -307,24 +307,23 @@ cmd(
     <div class="term-window">
       <div class="term-titlebar">
         <div class="traffic-lights">
-          <span class="tl red"></span><span class="tl yellow"></span><span
-            class="tl green"></span>
+          <span class="tl red"></span>
+          <span class="tl yellow"></span>
+          <span class="tl green"></span>
         </div>
         <span class="term-title">securelayer — legal.diff</span>
       </div>
 
       <div class="diff-body">
-        {
-          rows.map((r, i) => (
-            <div
-              class={`dline${r.added ? " added" : ""}${r.cls ? " " + r.cls : ""}`}
-            >
-              <span class="ln">{r.html ? i + 1 : ""}</span>
-              <span class="mark">{r.added ? "+" : ""}</span>
-              <span class="lc" set:html={r.html} />
-            </div>
-          ))
-        }
+        {rows.map((r, i) => (
+          <div
+            class={`dline${r.added ? " added" : ""}${r.cls ? " " + r.cls : ""}`}
+          >
+            <span class="ln">{r.html ? i + 1 : ""}</span>
+            <span class="mark">{r.added ? "+" : ""}</span>
+            <span class="lc" set:html={r.html} />
+          </div>
+        ))}
       </div>
     </div>
   </body>
