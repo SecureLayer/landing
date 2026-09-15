@@ -504,7 +504,25 @@ const logoMark = logoSource
           </div>
 
           <div class="m-row-note" style="--d:.1s">
-            <div class="m-card m-card-note m-card-note-square">
+            <a
+              class="m-card-msg"
+              href="https://signal.me/#eu/jOCElNN5Meq0MDrSKeetbOt0N7YXLFFiH37-UJO1vCdG_wY0cuVJdYbu7yFtZq62"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                class="m-card-msg-icon"
+                src="/images/dock-icons/signal-ultramarine.png"
+                alt="Signal"
+              />
+              <div>
+                <div class="m-card-msg-text">
+                  Questions? Message us — safely and privately
+                </div>
+                <span class="m-btn-dark">Open Signal</span>
+              </div>
+            </a>
+            <div class="m-card-note m-card-note-square">
               <div class="m-card-note-eyebrow">PRO TIPS</div>
               <p>
                 <em>Security</em> is not a project,
@@ -550,22 +568,34 @@ const logoMark = logoSource
               <span class="m-card-file-bar">Download the file</span>
             </a>
             <a
-              class="m-card-msg"
-              href="https://signal.me/#eu/jOCElNN5Meq0MDrSKeetbOt0N7YXLFFiH37-UJO1vCdG_wY0cuVJdYbu7yFtZq62"
+              class="m-card-file"
+              href="/docs/securelayer-before-you-say-you-are-secure.pdf"
               target="_blank"
               rel="noopener"
             >
-              <img
-                class="m-card-msg-icon"
-                src="/images/dock-icons/signal-ultramarine.png"
-                alt="Signal"
-              />
-              <div>
-                <div class="m-card-msg-text">
-                  Questions? Message us — safely and privately
-                </div>
-                <span class="m-btn-dark">Open Signal</span>
-              </div>
+              <svg class="m-folder-icon" viewBox="0 0 64 50" fill="none">
+                <defs>
+                  <linearGradient id="folderGrad2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#6dd0fa"></stop>
+                    <stop offset="1" stop-color="#0a84ff"></stop>
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M2 10c0-2.2 1.8-4 4-4h16l5 5h31c2.2 0 4 1.8 4 4v29c0 2.2-1.8 4-4 4H6c-2.2 0-4-1.8-4-4V10z"
+                  fill="url(#folderGrad2)"
+                ></path>
+                <rect
+                  x="8"
+                  y="17"
+                  width="48"
+                  height="3.4"
+                  rx="1.7"
+                  fill="#fff"
+                  opacity=".85"
+                ></rect>
+              </svg>
+              <span>Before-you-say-you-are-secure.pdf</span>
+              <span class="m-card-file-bar">Download the file</span>
             </a>
           </div>
 
@@ -1594,8 +1624,8 @@ const logoMark = logoSource
     border: 1px solid rgba(255, 255, 255, 0.45);
     box-shadow: 0 8px 26px rgba(0, 0, 0, 0.12);
   }
-  /* fade-in state lives only on .m-card and the row wrapper (.m-row2) —
-     m-card-file/m-card-msg inherit visibility from their row parent, not their own state */
+  /* fade-in state lives only on .m-card and the row wrappers (.m-row2, .m-row-note) —
+     m-card-file/m-card-msg/m-card-note-square inherit visibility from their row parent, not their own state */
   .m-card {
     opacity: 0;
     transform: translateY(16px);
@@ -1708,14 +1738,25 @@ const logoMark = logoSource
     margin-bottom: 10px;
   }
 
-  /* PRO TIPS becomes a small square card sitting alone in its row — the rest of the row
-     stays empty (blurred background showing through), matching the reference's sticky-note sizing */
+  /* Signal contact card + PRO TIPS square note, side by side — mirrors .m-row2's
+     two-up layout; fade-in is row-level here too, so neither card carries .m-card */
   .m-row-note {
     display: flex;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.5s ease var(--d, 0s),
+      transform 0.5s ease var(--d, 0s);
+  }
+  .m-scene.is-unlocked .m-row-note {
+    opacity: 1;
+    transform: translateY(0);
   }
   .m-card-note-square {
     width: 158px;
     height: 158px;
+    flex-shrink: 0;
     padding: 16px;
     display: flex;
     flex-direction: column;
@@ -1771,7 +1812,7 @@ const logoMark = logoSource
   .m-card-file-bar {
     display: block;
     width: calc(100% + 20px);
-    margin: 12px -10px 0;
+    margin: auto -10px 0;
     padding: 11px 10px;
     background: rgba(255, 255, 255, 0.55);
     border-top: 1px solid rgba(255, 255, 255, 0.5);
