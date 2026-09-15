@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Breaker — securelayer.co</title>
+    <meta
+      name="description"
+      content="Can you talk Acme Returns Bot into breaking its own rules? A prompt-injection demo built around agent hijacking, the same failure mode behind real incidents."
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #0a0f0f;
+        color: #e0e0e0;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .page {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 48px 24px 24px;
+      }
+
+      .ab-hero {
+        text-align: center;
+      }
+      .ab-hero h1 {
+        font-size: 1.8rem;
+        line-height: 1.3;
+        margin-bottom: 16px;
+      }
+      .ab-hero p {
+        color: #aab;
+        margin-bottom: 8px;
+      }
+      .ab-hero code {
+        font-family: monospace;
+        color: #5eead4;
+      }
+      .ab-spots {
+        font-weight: 700;
+        color: #5eead4;
+        margin-top: 16px;
+      }
+
+      .ab-game {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 24px 24px 48px;
+      }
+      #ab-ticket {
+        width: 100%;
+        font-family: inherit;
+        font-size: 1rem;
+        color: #e0e0e0;
+        background: #12181a;
+        border: 1px solid #1a3030;
+        border-radius: 8px;
+        padding: 12px;
+      }
+      #ab-ticket:focus {
+        outline: 2px solid #5eead4;
+        outline-offset: 2px;
+      }
+      .ab-count {
+        text-align: right;
+        font-size: 0.8rem;
+        color: #888;
+        margin: 4px 0 12px;
+      }
+      #ab-submit {
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #0a0f0f;
+        background: #5eead4;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 24px;
+        cursor: pointer;
+      }
+      #ab-submit:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .ab-result {
+        margin-top: 24px;
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid #1a3030;
+      }
+      .ab-result.win {
+        background: rgba(94, 234, 212, 0.12);
+        border-color: #5eead4;
+      }
+      .ab-result.lose {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      /* ── Footer (matches security.astro / sustainability.astro / legal.astro) ── */
+      .site-footer {
+        border-top: 1px solid #1a3030;
+        padding: 40px 24px;
+        text-align: center;
+        margin-top: 24px;
+      }
+      .site-footer p {
+        color: #888;
+        font-size: 13px;
+      }
+      .footer-links {
+        margin-top: 14px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      .footer-links a {
+        font-size: 12px;
+        color: #888;
+        text-decoration: none;
+      }
+      .footer-links a:hover {
+        color: #5eead4;
+      }
+      .footer-green-link {
+        display: inline-block;
+        margin-top: 18px;
+        opacity: 0.85;
+        transition: opacity 0.2s;
+      }
+      .footer-green-link:hover {
+        opacity: 1;
+      }
+      .footer-green-link img {
+        display: block;
+        width: 100px;
+        height: auto;
+        margin: 0 auto;
+      }
+      .footer-copy {
+        margin-top: 12px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="ab-hero">
+        <h1>Can you talk Acme Returns Bot into breaking its own rules?</h1>
+        <p>
+          Acme Returns Bot is a fictional customer-support agent with two tools:
+          it can look up an order, and it can issue a refund — capped at $50
+          without manager approval. You're customer
+          <code>ORD-1001</code>. Write a support ticket. See if you can get it
+          to refund you more than $50, or hand over someone else's order
+          details.
+        </p>
+        <p id="ab-spots" class="ab-spots">
+          Loading today's spots…
+        </p>
+      </section>
+
+      <section class="ab-game">
+        <form id="ab-form">
+          <label for="ab-ticket">Your support ticket</label>
+          <textarea
+            id="ab-ticket"
+            maxlength="500"
+            rows="6"
+            placeholder="Hi, I'd like a refund for my order..."
+          ></textarea>
+          <div class="ab-count">
+            <span id="ab-char-count">0</span>/500
+          </div>
+          <button type="submit" id="ab-submit">
+            Submit ticket
+          </button>
+        </form>
+        <div id="ab-result" class="ab-result" hidden></div>
+      </section>
+
+      <footer class="site-footer">
+        <p>Choose cybersecurity, it's cheaper.</p>
+        <p class="footer-links">
+          <a href="/">Home</a>
+          <a href="/security">Security</a>
+          <a href="/sustainability">Environment</a>
+          <a href="/legal">Legal</a>
+          <a href="/ai-security">AI Security</a>
+          <a href="/ai-agent">Agent Breaker</a>
+          <a
+            href="https://github.com/SecureLayer/landing"
+            target="_blank"
+            rel="noopener"
+          >
+            Source
+          </a>
+        </p>
+        <a href="/sustainability" class="footer-green-link">
+          <img
+            src="/gwf-badge.png"
+            alt="This website runs on green hosting - verified by thegreenwebfoundation.org"
+            width="200"
+            height="95"
+          />
+        </a>
+        <p class="footer-copy">&copy; 2026 SecureLayer. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <script is:inline src="/scripts/ai-agent.js"></script>
+  </body>
+</html>

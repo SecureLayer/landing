@@ -5,7 +5,14 @@ import AxeBuilder from "@axe-core/playwright";
 
 const DIST = new URL("../dist/", import.meta.url).pathname;
 const PORT = 4173;
-const PAGES = ["/", "/security/", "/sustainability/", "/legal/"];
+const PAGES = [
+  "/",
+  "/security/",
+  "/sustainability/",
+  "/legal/",
+  "/ai-agent/",
+  "/ai-security/",
+];
 
 function startServer() {
   const server = createServer(sirv(DIST, { single: false }));
