@@ -1,0 +1,80 @@
+header:
+  schema-version: 2.2.0
+  last-updated: "2026-09-15"
+  last-reviewed: "2026-09-15"
+  url: https://raw.githubusercontent.com/SecureLayer/landing/main/SECURITY-INSIGHTS.yml
+
+project:
+  name: SecureLayer
+  homepage: https://securelayer.co
+  repositories:
+    - name: landing
+      url: https://github.com/SecureLayer/landing
+      comment: |
+        The securelayer.co site — landing page, service catalogue, and public
+        security/sustainability pages. Currently the only repository under
+        active development.
+  vulnerability-reporting:
+    reports-accepted: true
+    bug-bounty-available: false
+    contact:
+      name: SecureLayer security response
+      primary: true
+    policy: https://github.com/SecureLayer/landing/blob/main/SECURITY.md
+    in-scope:
+      - supply chain issues in build dependencies
+      - deployment pipeline integrity
+      - content injection or defacement
+    out-of-scope:
+      - social engineering
+      - third-party infrastructure (GitHub, Cloudflare, Cal.com)
+
+repository:
+  url: https://github.com/SecureLayer/landing
+  status: active
+  accepts-change-request: true
+  accepts-automated-change-request: true
+  documentation:
+    contributing-guide: https://github.com/SecureLayer/landing/blob/main/CONTRIBUTING.md
+    security-policy: https://github.com/SecureLayer/landing/blob/main/SECURITY.md
+  license:
+    url: https://github.com/SecureLayer/landing/blob/main/LICENSE
+    expression: AGPL-3.0
+  release:
+    changelog: https://github.com/SecureLayer/landing/blob/main/CHANGELOG.md
+    automated-pipeline: true
+    attestations:
+      - name: Sigstore/SLSA release provenance
+        predicate-uri: https://slsa.dev/provenance/v1
+        comment: |
+          Every release is signed and carries build provenance via Sigstore,
+          produced by .github/workflows/release-signing.yml.
+  security:
+    assessments:
+      self:
+        evidence: https://github.com/SecureLayer/landing/blob/main/SECURITY_ASSESSMENT.md
+        date: "2026-09-07"
+        comment: |
+          Threat model covering the site's actual attack surface (build
+          pipeline, dependencies, deployment credentials, branch protection),
+          reconciled against the live repository configuration as of the date
+          above — not a generic template.
+    tools:
+      - name: OpenSSF Scorecard
+        type: SCA
+        integration:
+          ci: false
+          release: true
+        comment: |
+          Runs on push to main and a weekly schedule (not on PRs). Aggregate
+          score published at https://scorecard.dev/viewer/?uri=github.com/SecureLayer/landing.
+      - name: CodeQL
+        type: SAST
+        integration:
+          ci: true
+        comment: Runs on every push and pull request to main.
+      - name: Dependabot
+        type: SCA
+        integration:
+          ci: true
+        comment: Automated dependency update PRs, reviewed and merged manually.
