@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Agent Security — securelayer.co</title>
+    <meta
+      name="description"
+      content="Can your agents be talked into anything? An assessment and incident-response service for AI agents — the exact failure mode behind the 2026 Reuters OpenAI hijack story."
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #0a0f0f;
+        color: #e0e0e0;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .page {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 64px 24px 24px;
+      }
+
+      /* ── Hero ── */
+      .as-hero {
+        text-align: center;
+        margin-bottom: 64px;
+      }
+      .as-hero h1 {
+        font-size: 2rem;
+        line-height: 1.3;
+        margin-bottom: 20px;
+      }
+      .as-hero p {
+        color: #aab;
+        max-width: 620px;
+        margin: 0 auto;
+      }
+      .as-hero a {
+        color: #5eead4;
+        text-decoration: underline;
+      }
+
+      /* ── Content sections ── */
+      .as-block {
+        margin-bottom: 56px;
+        padding-bottom: 56px;
+        border-bottom: 1px solid #1a3030;
+      }
+      .as-block:last-of-type {
+        border-bottom: none;
+      }
+      .as-eyebrow {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #5eead4;
+        margin-bottom: 12px;
+      }
+      .as-question {
+        font-size: 1.3rem;
+        font-weight: 700;
+        line-height: 1.35;
+        margin-bottom: 14px;
+      }
+      .as-desc {
+        color: #ccc;
+        margin-bottom: 20px;
+      }
+      .as-highlight {
+        font-size: 0.85rem;
+        color: #999;
+        border-left: 2px solid #5eead4;
+        padding-left: 14px;
+      }
+      .as-highlight strong {
+        color: #e0e0e0;
+      }
+      .as-highlight a {
+        color: #5eead4;
+        text-decoration: underline;
+      }
+
+      /* ── CTA ── */
+      .as-cta {
+        text-align: center;
+        padding: 40px 24px 64px;
+      }
+      .as-cta h2 {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+      }
+      .as-cta p {
+        color: #aab;
+        max-width: 480px;
+        margin: 0 auto 24px;
+      }
+      .as-cta-button {
+        display: inline-block;
+        background: #5eead4;
+        color: #0a0f0f;
+        font-weight: 700;
+        padding: 12px 28px;
+        border-radius: 100px;
+      }
+      .as-cta-button:hover {
+        text-decoration: none;
+        opacity: 0.9;
+      }
+
+      /* ── Footer (matches security.astro / ai-agent.astro) ── */
+      .site-footer {
+        border-top: 1px solid #1a3030;
+        padding: 40px 24px;
+        text-align: center;
+        margin-top: 24px;
+      }
+      .site-footer p {
+        color: #888;
+        font-size: 13px;
+      }
+      .footer-links {
+        margin-top: 14px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      .footer-links a {
+        font-size: 12px;
+        color: #888;
+        text-decoration: none;
+      }
+      .footer-links a:hover {
+        color: #5eead4;
+      }
+      .footer-green-link {
+        display: inline-block;
+        margin-top: 18px;
+        opacity: 0.85;
+        transition: opacity 0.2s;
+      }
+      .footer-green-link:hover {
+        opacity: 1;
+      }
+      .footer-green-link img {
+        display: block;
+        width: 100px;
+        height: auto;
+        margin: 0 auto;
+      }
+      .footer-copy {
+        margin-top: 12px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="as-hero">
+        <h1>Can your agents be talked into anything?</h1>
+        <p>
+          In September 2026, attackers hijacked OpenAI agents through a
+          compromised German website — an undisclosed break-out, not a
+          hypothetical.
+          <a
+            href="https://www.reuters.com/world/europe/openai-agents-hijacked-german-website-previously-undisclosed-ai-breakout-this-2026-09-04/"
+            target="_blank"
+            rel="noopener"
+          >
+            Source: Reuters
+          </a>
+          . Any agent that reads a web page, a document, or a tool's output can
+          be manipulated the same way — usually without anyone noticing until
+          later.
+        </p>
+      </section>
+
+      <section class="as-block">
+        <p class="as-eyebrow">AI Agent Security Assessment</p>
+        <h2 class="as-question">
+          Where can your agent be talked into something it shouldn't do?
+        </h2>
+        <p class="as-desc">
+          We map every point where your agent takes in text it didn't ask for —
+          pages it browses, documents it reads, outputs from other tools it
+          calls — because any one of those is a place someone else's
+          instructions can quietly become your agent's instructions. Then we
+          look at what it's actually allowed to do once that happens: what it
+          can call, what it can send, what it can spend, what it can see.
+        </p>
+        <p class="as-highlight">
+          <strong>Exposure mapping</strong> — every input path, every permission
+          the agent holds, and what an attacker gains at each one.
+        </p>
+      </section>
+
+      <section class="as-block">
+        <p class="as-eyebrow">Detection &amp; Recovery</p>
+        <h2 class="as-question">
+          What happens the moment your agent goes off-script?
+        </h2>
+        <p class="as-desc">
+          Detection is a solved-enough problem, and it's not ours to re-solve —
+          Lakera, Prompt Security, and others already do it with real funding
+          and ML teams behind them. We plug into what already works instead of
+          competing with it, and put our time into the part every one of those
+          tools stops short of: what happens the moment yours actually fires.
+          Your agent pauses. You get told. It resets using authority you already
+          have over your own system — not a stranger's website reaching in, an
+          operator's own switch. You can see the exact failure mode this defends
+          against for yourself:{" "}
+          <a href="/ai-agent">try to break our demo agent</a>.
+        </p>
+        <p class="as-highlight">
+          <strong>Recovery, not just alerting</strong> — a defined pause/reset
+          path, not a dashboard that tells you something went wrong after the
+          fact.
+        </p>
+      </section>
+
+      <section class="as-block">
+        <p class="as-eyebrow">What We Learn, Together</p>
+        <h2 class="as-question">
+          Does reporting an incident put your business on display?
+        </h2>
+        <p class="as-desc">
+          No. Every incident is logged privately, to you, by default — nobody
+          else sees it. If you choose to opt in, we strip it down to the
+          technique itself (the injection pattern, not your data or your
+          business context) and add it to a shared feed every client benefits
+          from. You decide per incident whether it's worth sharing. Most
+          security vendors already pool signal this way; we're not inventing the
+          model, just applying it here.
+        </p>
+        <p class="as-highlight">
+          <strong>Private by default, useful by choice</strong> — your log is
+          yours; the pattern library is opt-in.
+        </p>
+      </section>
+
+      <section class="as-cta">
+        <h2>Talk to us before an attacker talks to your agent.</h2>
+        <p>
+          This starts as a conversation, not a sales form — tell us what your
+          agent actually does, and we'll tell you honestly whether this is worth
+          doing yet.
+        </p>
+        <a
+          class="as-cta-button"
+          href="https://cal.com/securelayer"
+          target="_blank"
+          rel="noopener"
+        >
+          Book a call →
+        </a>
+      </section>
+
+      <footer class="site-footer">
+        <p>Choose cybersecurity, it's cheaper.</p>
+        <p class="footer-links">
+          <a href="/">Home</a>
+          <a href="/security">Security</a>
+          <a href="/sustainability">Environment</a>
+          <a href="/legal">Legal</a>
+          <a href="/ai-security">AI Security</a>
+          <a href="/ai-agent">Agent Breaker</a>
+          <a
+            href="https://github.com/SecureLayer/landing"
+            target="_blank"
+            rel="noopener"
+          >
+            Source
+          </a>
+        </p>
+        <a href="/sustainability" class="footer-green-link">
+          <img
+            src="/gwf-badge.png"
+            alt="This website runs on green hosting - verified by thegreenwebfoundation.org"
+            width="200"
+            height="95"
+          />
+        </a>
+        <p class="footer-copy">&copy; 2026 SecureLayer. All rights reserved.</p>
+      </footer>
+    </div>
+  </body>
+</html>

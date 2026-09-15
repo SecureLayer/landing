@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test": "node scripts/check-links.mjs && node scripts/check-a11y.mjs",
+    "test": "node scripts/check-links.mjs && node scripts/check-a11y.mjs && node scripts/check-agent-breaker.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
