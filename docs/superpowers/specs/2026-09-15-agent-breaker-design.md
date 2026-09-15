@@ -35,7 +35,7 @@ generic Gandalf clone.
   "call a tool or don't"; it never free-talks back beyond a short
   in-character response.
 
-## Scenario: "Acme Returns Bot"
+## Scenario: "Eliza"
 
 A fictional customer-support agent for a fictional company. The visitor
 plays a customer submitting a support ticket — a block of text — which the
