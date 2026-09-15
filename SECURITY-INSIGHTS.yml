@@ -1,7 +1,7 @@
 header:
   schema-version: 2.2.0
-  last-updated: '2026-09-15'
-  last-reviewed: '2026-09-15'
+  last-updated: "2026-09-15"
+  last-reviewed: "2026-09-15"
   url: https://raw.githubusercontent.com/SecureLayer/landing/main/SECURITY-INSIGHTS.yml
 
 project:
@@ -53,7 +53,7 @@ repository:
     assessments:
       self:
         evidence: https://github.com/SecureLayer/landing/blob/main/SECURITY_ASSESSMENT.md
-        date: '2026-09-07'
+        date: "2026-09-07"
         comment: |
           Threat model covering the site's actual attack surface (build
           pipeline, dependencies, deployment credentials, branch protection),
