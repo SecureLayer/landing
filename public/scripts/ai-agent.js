@@ -35,10 +35,14 @@ form.addEventListener("submit", async (e) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ticket: ticketInput.value }),
     });
-    const data = await res.json();
+    const data = await res.json().catch(() => null);
 
     resultEl.hidden = false;
-    if (res.status === 429 || res.status === 400) {
+    if (!data || res.status >= 500) {
+      resultEl.className = "ab-result lose";
+      resultEl.textContent =
+        "Something went wrong on our side — try again later.";
+    } else if (res.status === 429 || res.status === 400) {
       resultEl.className = "ab-result lose";
       resultEl.textContent = data.error;
     } else if (data.win) {
@@ -48,6 +52,11 @@ form.addEventListener("submit", async (e) => {
       resultEl.className = "ab-result lose";
       resultEl.textContent = "It held the line — try a different angle.";
     }
+  } catch {
+    resultEl.hidden = false;
+    resultEl.className = "ab-result lose";
+    resultEl.textContent =
+      "Could not reach the server — check your connection and try again.";
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = "Submit ticket";

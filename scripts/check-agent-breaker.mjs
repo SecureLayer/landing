@@ -65,6 +65,37 @@ try {
 
   const resultClass = await page.locator("#ab-result").getAttribute("class");
   assert(resultClass.includes("win"), "applies the win styling class");
+
+  // Server failure (non-JSON 500) must show a message, not silence
+  await page.unroute("**/api/ai-agent/play");
+  await page.route("**/api/ai-agent/play", (route) =>
+    route.fulfill({
+      status: 500,
+      contentType: "text/html",
+      body: "<h1>error</h1>",
+    }),
+  );
+  await page.locator("#ab-form button[type=submit]").click();
+  await page.waitForFunction(() =>
+    document.getElementById("ab-result")?.textContent.includes("went wrong"),
+  );
+  assert(true, "shows an error message when the server returns a non-JSON 500");
+  const btnDisabled = await page.locator("#ab-submit").isDisabled();
+  assert(!btnDisabled, "re-enables the submit button after a server failure");
+
+  // Network failure must also show a message
+  await page.unroute("**/api/ai-agent/play");
+  await page.route("**/api/ai-agent/play", (route) => route.abort());
+  await page.locator("#ab-form button[type=submit]").click();
+  await page.waitForFunction(() =>
+    document
+      .getElementById("ab-result")
+      ?.textContent.includes("Could not reach"),
+  );
+  assert(
+    true,
+    "shows an error message when the request cannot reach the server",
+  );
 } finally {
   await browser.close();
   server.close();
