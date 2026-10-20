@@ -3,22 +3,22 @@
   "label": "Why us?",
   "slides": [
     {
-      "kicker": "CHECK US",
+      "kicker": "CHECK",
       "heading": "Don't believe us. Check us.",
       "body": "Our own security scores and the footprint of this website are public.",
       "links": [
         {
-          "label": "See our security",
+          "label": "Check our security level",
           "href": "/security/"
         },
         {
-          "label": "See our environmental impact",
+          "label": "Check our environmental impact",
           "href": "/sustainability/"
         }
       ]
     },
     {
-      "kicker": "ASK US",
+      "kicker": "ASK",
       "heading": "Ask a real question.",
       "body": "Send us your question and judge us by the answer. We reply fast.",
       "links": [
@@ -30,12 +30,12 @@
       ]
     },
     {
-      "kicker": "PLAIN WORDS",
+      "kicker": "CLEAR",
       "heading": "We say it in plain words.",
       "body": "Short, clear, in priority order: what to fix first."
     },
     {
-      "kicker": "TALK TO US",
+      "kicker": "CALL",
       "heading": "Talk to us.",
       "body": "A call is the quickest way to see if we fit."
     }
