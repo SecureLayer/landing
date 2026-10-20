@@ -362,21 +362,19 @@ try {
           JSON.stringify(door.proposals),
         `#${door.id}: the box lists its three proposals in order`,
       );
-      assert(
-        (await page
-          .getByRole("link", { name: door.label, exact: true })
-          .count()) === 1,
-        `#${door.id}: the link's accessible name is just its label`,
+      // The name comes from the visible content (tag, label, proposals), so
+      // every visible word is in it (WCAG 2.5.3, axe label-content-name-mismatch).
+      const name = await link.evaluate((el) =>
+        el.textContent.replace(/\s+/g, " ").trim(),
       );
-      const described = await link.evaluate((el) => {
-        const node = document.getElementById(
-          el.getAttribute("aria-describedby") ?? "",
-        );
-        return node ? node.textContent : "";
-      });
       assert(
-        door.proposals.every((x) => described.includes(x)),
-        `#${door.id}: the proposals are the link's description for screen readers`,
+        name.includes(door.label) &&
+          door.proposals.every((x) => name.includes(x)),
+        `#${door.id}: the link's accessible name holds its label and proposals`,
+      );
+      assert(
+        (await page.getByRole("link", { name: door.label }).count()) === 1,
+        `#${door.id}: the link is found by its label`,
       );
     }
     await context.close();
