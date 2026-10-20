@@ -1006,7 +1006,14 @@ import data from "../data/why-us.json";
                   <h3 class="wdwd-h" tabindex="-1">
                     {slide.heading}
                   </h3>
-                  <p class="wdwd-body">{slide.body}</p>
+                  <p class="wdwd-body">
+                    {slide.body.split(/(?<=\.)\s+/).map((line, n) => (
+                      <>
+                        {n > 0 && <br />}
+                        {line}
+                      </>
+                    ))}
+                  </p>
                   {"links" in slide && (
                     <p class="wdwd-links">
                       {slide.links.map((link) => (

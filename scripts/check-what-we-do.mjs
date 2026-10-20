@@ -1177,6 +1177,43 @@ try {
       (await page.locator(".wdwd-dot").count()) === 4,
       "why-us: four dots for four slides",
     );
+    assert(
+      JSON.stringify(
+        await page.locator(".wdwd-slide .wdwd-k").allTextContents(),
+      ) === JSON.stringify(["CHECK", "ASK", "CLEAR", "CALL"]),
+      "why-us: the four slides open with CHECK, ASK, CLEAR, CALL",
+    );
+    assert(
+      JSON.stringify(
+        await page
+          .locator(".wdwd-slide")
+          .first()
+          .locator(".wdwd-links a")
+          .allTextContents(),
+      ) ===
+        JSON.stringify([
+          "Check our security level",
+          "Check our environmental impact",
+        ]),
+      "why-us: the first slide links read 'Check our security level' and 'Check our environmental impact'",
+    );
+    const askLines = await page
+      .locator(".wdwd-slide")
+      .nth(1)
+      .locator(".wdwd-body")
+      .evaluate((el) =>
+        el.innerHTML
+          .split(/<br\s*\/?>/)
+          .map((s) => s.replace(/<[^>]*>/g, "").trim()),
+      );
+    assert(
+      JSON.stringify(askLines) ===
+        JSON.stringify([
+          "Send us your question and judge us by the answer.",
+          "We reply fast.",
+        ]),
+      "why-us: the ASK statement is on two lines, broken at the full stop",
+    );
     for (let i = 0; i < 3; i++) await page.locator(".wdwd-next").click();
     await page.waitForTimeout(700);
     assert(
@@ -1374,6 +1411,19 @@ try {
     assert(
       social.noteBeforeIcons && social.gap >= 8,
       `phone: the social media box shows its text before the icons (gap ${social.gap}px)`,
+    );
+
+    // lock-screen clock: "HH:MM" with a colon, in the markup (shown before JS runs) and once JS runs
+    const clockLive = await lock.page.evaluate(() =>
+      document.getElementById("mStandTime").textContent.trim(),
+    );
+    const clockMarkup = readFileSync(`${DIST}index.html`, "utf8").match(
+      /id="mStandTime"[^>]*>\s*([^<\s]+)\s*</,
+    )?.[1];
+    assert(
+      /^\d{2}:\d{2}$/.test(clockLive) &&
+        /^\d{2}:\d{2}$/.test(clockMarkup ?? ""),
+      `phone: the lock-screen clock uses a colon (live "${clockLive}", markup "${clockMarkup}")`,
     );
 
     // tips: one at a time, from src/data/pro-tips.json, each on a single line
