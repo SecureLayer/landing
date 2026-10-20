@@ -1201,11 +1201,15 @@ try {
       .locator(".wdwd-slide")
       .nth(1)
       .locator(".wdwd-body")
-      .evaluate((el) =>
-        el.innerHTML
-          .split(/<br\s*\/?>/)
-          .map((s) => s.replace(/<[^>]*>/g, "").trim()),
-      );
+      .evaluate((el) => {
+        // read the DOM: the text between <br> elements is one line
+        const lines = [""];
+        for (const node of el.childNodes) {
+          if (node.nodeName === "BR") lines.push("");
+          else lines[lines.length - 1] += node.textContent;
+        }
+        return lines.map((s) => s.trim());
+      });
     assert(
       JSON.stringify(askLines) ===
         JSON.stringify([
