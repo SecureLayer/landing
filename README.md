@@ -21,7 +21,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for a full description of the system's ac
 
 ## Local development
 
-Prerequisites: Node.js >= 22.12.0
+Prerequisites: Node.js >= 22.23.4
 
 ```sh
 npm install
