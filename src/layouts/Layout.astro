@@ -15,12 +15,21 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Nunito:wght@400;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/inter.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
+    <link
+      rel="preload"
+      href="/fonts/nunito.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
   </head>
   <body>
     <nav>
@@ -100,7 +109,6 @@ const { title, description } = Astro.props;
     --font: "Inter", sans-serif;
     --font-head: "Fraunces", serif;
     --font-round: "Nunito", sans-serif;
-    --font-mono: "JetBrains Mono", "Courier New", monospace;
   }
 
   html {

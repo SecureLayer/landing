@@ -1,0 +1,2 @@
+Inter, Fraunces and Nunito are licensed under the SIL Open Font License 1.1 (https://openfontlicense.org).
+Latin subsets as served by Google Fonts, self-hosted so visitors' browsers make no request to Google.
