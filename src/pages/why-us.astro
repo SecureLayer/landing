@@ -13,12 +13,21 @@ import data from "../data/why-us.json";
       content="Experienced, independent, in plain language. 10+ years of cybersecurity experience across public and private organisations, practical reviews and a short fix list in priority order."
     />
     <link rel="canonical" href="https://securelayer.co/why-us" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fraunces:ital,opsz,wght@1,9..144,600&family=Nunito:wght@700;900&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/inter.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
+    <link
+      rel="preload"
+      href="/fonts/nunito.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
     <script is:inline src="/scripts/what-we-do.js"></script>
     <style is:global>
       /* ≤860px: no panel, the page sits straight on the blurred wallpaper (white text,

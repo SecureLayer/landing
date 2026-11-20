@@ -35,9 +35,9 @@ A real, precedented class of attack (e.g. the 2025 `tj-actions/changed-files` su
 
 **Mitigations in place:** every third-party action across all 6 workflows is pinned to a specific commit SHA (not a mutable version tag), and `step-security/harden-runner` audits network egress on every job. Only one workflow references a repository secret: `scorecard.yml` passes `SCORECARD_TOKEN`, a fine-grained personal access token limited to `Administration: read` on this repository alone, so that OpenSSF Scorecard can evaluate branch-protection rules. If stolen it can only read this repo's admin settings — it cannot write code, secrets, or releases — and it is referenced as `${{ secrets.SCORECARD_TOKEN || github.token }}`, so removing it degrades gracefully rather than breaking the workflow. Every other workflow references no secret at all, so a compromised Action step in them has nothing sensitive to steal beyond the auto-issued, read-scoped `GITHUB_TOKEN`.
 
-### 4. Third-party interface trust (Google Fonts, Cal.com)
+### 4. Third-party interface trust (Cal.com)
 
-Lowest impact of the four. Google Fonts is a well-known, low-risk third party — the only real exposure is IP address logging, already disclosed. Cal.com booking is a pure outbound link with no data return path into this system, so a Cal.com-side incident would not affect this codebase or its infrastructure at all — the risk is fully transferred.
+Lowest impact of the four. Fonts are self-hosted since 2026-11-20, so rendered pages make no third-party request. Cal.com booking is a pure outbound link with no data return path into this system, so a Cal.com-side incident would not affect this codebase or its infrastructure at all — the risk is fully transferred.
 
 ## Threats considered and deliberately out of scope
 
